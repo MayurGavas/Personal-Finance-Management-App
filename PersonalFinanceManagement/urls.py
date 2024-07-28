@@ -21,5 +21,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('authentication.urls'), name='authentication'),
+    path('expenses/', include('expense_management_service.urls'), name = 'expense_management_service')
 
 ]
