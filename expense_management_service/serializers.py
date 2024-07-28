@@ -2,28 +2,21 @@ from django.contrib.auth.models import User
 from rest_framework.serializers import ModelSerializer
 from .models import UserExpensesModel
 
-class UserDetailSerializer(ModelSerializer):
 
+class UserDetailSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ['username','first_name','last_name','email']
+        fields = ['username', ]
 
-class AddUserExpenseViewSerializer(ModelSerializer):
 
+class UserExpenseViewSerializer(ModelSerializer):
     user = UserDetailSerializer(read_only=True)
+
     def create(self, validated_data):
         user = self.context['request'].user
         expense = UserExpensesModel.objects.create(user=user, **validated_data)
-
         return expense
 
     class Meta:
         model = UserExpensesModel
-        fields = ['category', 'amount', 'date', 'description', 'user']
-
-class GetUserExpenseViewSerializer(ModelSerializer):
-
-
-    class Meta:
-        model = UserExpensesModel
-        fields = ['category', 'amount', 'date', 'description', 'user']
+        fields = ['id', 'category', 'amount', 'date', 'description', 'user']
