@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authentication',
     'expense_management_service',
+    'income_management_service',
 ]
 
 if DEBUG:
